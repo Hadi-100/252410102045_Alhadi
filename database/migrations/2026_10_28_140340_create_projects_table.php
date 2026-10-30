@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('client_id')
+            $table->foreignId('klien_id')
                 ->constrained('users')
                 ->cascadeOnDelete();
 
@@ -37,7 +37,7 @@ return new class extends Migration
             // $table->check('budget_max >= budget_min');
 
             $table->index('status');
-            $table->index('client_id');
+            $table->index('klien_id');
         });
     }
 

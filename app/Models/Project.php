@@ -2,42 +2,24 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Project extends Model
 {
-    use HasFactory;
+    protected $fillable = ['klien_id','judul','deskripsi','kategori','budget_min','budget_max','batas_lelang','status'];
 
-    protected $fillable = [
-        'client_id',
-        'judul',
-        'deskripsi',
-        'kategori',
-        'budget_min',
-        'budget_max',
-        'batas_lelang',
-        'status',
+    public function klien() { 
+        return $this->belongsTo(User::class, 'klien_id'); 
+    }
+    public function bids()   { 
+        return $this->hasMany(Bid::class); 
+    }
+    
+    protected $casts = [
+        'batas_lelang' => 'date',
     ];
 
-    protected function casts(): array
-    {
-        return [
-            'budget_min' => 'integer',
-            'budget_max' => 'integer',
-            'batas_lelang' => 'date',
-        ];
-    }
-
-    public function client(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'client_id');
-    }
-
-    public function bids(): HasMany
-    {
-        return $this->hasMany(Bid::class, 'project_id');
-    }
+    protected $attributes = [
+        'is_winner' => 'boolean',
+    ];
 }
