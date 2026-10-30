@@ -22,7 +22,7 @@ class ProjectController extends Controller
     // Menampilkan form tambah project
     public function create()
     {
-        $clients = \App\Models\User::where('role', 'klien')->get();
+        $clients = User::where('role', 'klien')->get();
 
 
         return view('projects.create', compact('clients'));
