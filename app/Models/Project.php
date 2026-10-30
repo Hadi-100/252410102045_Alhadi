@@ -18,8 +18,4 @@ class Project extends Model
     protected $casts = [
         'batas_lelang' => 'date',
     ];
-
-    protected $attributes = [
-        'is_winner' => 'boolean',
-    ];
 }
